@@ -20,7 +20,7 @@ When using RxDB with leader election in Safari on iOS, if a leader tab (or the o
 ```bash
 cd app
 npm install
-npm run dev
+npm run dev -- --host
 ```
 
 ### Terminal 2 (Auth App):
@@ -28,7 +28,7 @@ npm run dev
 ```bash
 cd auth-app
 npm install
-npm run dev
+npm run dev -- --host
 ```
 
 2. **In Safari on iOS** (important!), open the main application:
