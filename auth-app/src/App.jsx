@@ -10,7 +10,8 @@ function App() {
         if (prevSeconds <= 1) {
           clearInterval(timer);
           // Redirect back to the main app with authentication success parameter
-          window.location.href = "http://localhost:5173?auth=success";
+          const currentHostname = window.location.hostname;
+          window.location.href = `http://${currentHostname}:5173?auth=success`;
           return 0;
         }
         return prevSeconds - 1;

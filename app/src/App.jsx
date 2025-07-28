@@ -1,56 +1,57 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
-const PAGE_TITLE = "RxDB Leader Election Test";
+const PAGE_TITLE = 'RxDB Leader Election Test'
 
 function App({ db }) {
-  const [isLeader, setIsLeader] = useState(false);
+  const [isLeader, setIsLeader] = useState(false)
 
   // Update document title based on isLeader state
   useEffect(() => {
-    document.title = isLeader ? `👑 LEADER - ${PAGE_TITLE}` : PAGE_TITLE;
-  }, [isLeader]);
+    document.title = isLeader ? `👑 LEADER - ${PAGE_TITLE}` : PAGE_TITLE
+  }, [isLeader])
 
   // Check leader election status
   const checkLeaderStatus = async () => {
     try {
-      const elector = db.leaderElector();
+      const elector = db.leaderElector()
 
-      const isLeader = elector.isLeader;
-      const hasLeader = await elector.hasLeader();
+      const isLeader = elector.isLeader
+      const hasLeader = await elector.hasLeader()
 
-      const msg = `Leader election status: isLeader=${isLeader}, hasLeader=${hasLeader}`;
-      console.log(msg);
+      const msg = `Leader election status: isLeader=${isLeader}, hasLeader=${hasLeader}`
+      console.log(msg)
     } catch (err) {
-      console.error("Error checking leader status:", err);
+      console.error('Error checking leader status:', err)
     }
-  };
+  }
 
   // Set up leader election listener
   useEffect(() => {
     // Update when this tab becomes leader
     db.waitForLeadership()
       .then(() => {
-        console.log("This tab is now the leader!");
-        setIsLeader(true);
-        checkLeaderStatus();
+        console.log('This tab is now the leader!')
+        setIsLeader(true)
+        checkLeaderStatus()
       })
       .catch((err) => {
-        console.error("Error waiting for leadership:", err);
-      });
+        console.error('Error waiting for leadership:', err)
+      })
 
     // Check initial status
-    checkLeaderStatus();
+    checkLeaderStatus()
 
     // Check status every 5 seconds
-    const interval = setInterval(checkLeaderStatus, 5000);
-    return () => clearInterval(interval);
-  }, [db]);
+    const interval = setInterval(checkLeaderStatus, 5000)
+    return () => clearInterval(interval)
+  }, [db])
 
   // Handle login button click
   const handleLogin = () => {
-    // Redirect to auth app (app2)
-    window.location.href = "http://localhost:5174";
-  };
+    // Redirect to auth app using current hostname
+    const currentHostname = window.location.hostname
+    window.location.href = `http://${currentHostname}:5174`
+  }
 
   return (
     <div className="app-container">
@@ -60,7 +61,7 @@ function App({ db }) {
 
       <div className="card">
         <div className="leader-status">
-          <h2>Status: {isLeader ? "👑 LEADER" : "NOT LEADER"}</h2>
+          <h2>Status: {isLeader ? '👑 LEADER' : 'NOT LEADER'}</h2>
 
           <div className="status-details">
             <p>
@@ -79,7 +80,7 @@ function App({ db }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

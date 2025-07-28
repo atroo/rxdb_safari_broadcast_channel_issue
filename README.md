@@ -31,7 +31,9 @@ npm install
 npm run dev
 ```
 
-2. **In Safari on iOS** (important!), open the main application at http://localhost:5173
+2. **In Safari on iOS** (important!), open the main application:
+   - **Local testing**: http://localhost:5173
+   - **Network testing**: http://[YOUR_IP]:5173 (replace with your machine's IP address)
 3. You should see the RxDB leader election status showing that the tab is a leader (with a crown icon)
 4. (Optional) Open a second Safari tab with the same URL - notice only one tab should be the leader
 5. In the first (leader) tab, click the "Login" button, which redirects to the auth-app
